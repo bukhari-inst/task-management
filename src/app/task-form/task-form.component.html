@@ -1,1 +1,43 @@
-<p>task-form works!</p>
+<div class="container">
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Task</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"
+              >Task Categories</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section>
+    <form>
+      <div class="mb-3">
+        <label for="Category" class="form-label">Category</label>
+        <input
+          type="text"
+          class="form-control"
+          id="Category"
+          aria-describedby="Category"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="Title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="Title" />
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </section>
+
+  <li *ngFor="let categories of categories">
+    <a routerLink="/detail/{{ categories.id }}">
+      <span class="badge">{{ categories.id }}</span> {{ categories.name }}
+    </a>
+  </li>
+</div>
