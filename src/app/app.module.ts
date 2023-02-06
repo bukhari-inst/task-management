@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './message/message.component';
+import { TaskFormComponent } from './task-form/task-form.component';
 
 @NgModule({
-  declarations: [AppComponent, MessageComponent],
+  declarations: [AppComponent, MessageComponent, TaskFormComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
