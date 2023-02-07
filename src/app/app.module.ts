@@ -7,9 +7,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MessageComponent } from './message/message.component';
 import { TaskFormComponent } from './task-form/task-form.component';
+import { TaskListComponent } from './task-list/task-list.component';
 
 @NgModule({
-  declarations: [AppComponent, MessageComponent, TaskFormComponent],
+  declarations: [AppComponent, MessageComponent, TaskFormComponent, TaskListComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
