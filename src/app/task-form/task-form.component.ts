@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
-import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-task-form',
@@ -20,7 +17,7 @@ export class TaskFormComponent implements OnInit {
   formData = {
     category: '',
     title: '',
-    describtion: '',
+    description: '',
     startdate: '',
     finishdate: '',
     status: '',

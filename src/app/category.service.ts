@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
-import { Category } from './category';
 import { MessageService } from './message.service';
+import { Category } from './category';
+import { Task } from './task';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,14 @@ export class CategoryService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
+  }
+
+  /** GET task category from the server */
+  getTask(): Observable<Task[]> {
+    return this.http.get<Task[]>(this.taskUrl).pipe(
+      tap((_) => this.log('fetched Task')),
+      catchError(this.handleError<Task[]>('getTask', []))
+    );
   }
 
   /** GET task category from the server */

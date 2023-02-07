@@ -1,20 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-light">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/task">Task</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Task Categories</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
 <section>
-  <form (ngSubmit)="add(formData)" #heroForm="ngForm">
+  <form (ngSubmit)="add(formData)" #taskForm="ngForm">
     <div class="row align-items-start">
       <div class="col">
         <div class="mb-3">
@@ -28,11 +13,14 @@
             name="category"
             #category="ngModel"
           >
-            <option selected>Select Task Category</option>
+            <option selected value="">Select Task Category</option>
             <option *ngFor="let ctg of categories" [value]="ctg.id">
               {{ ctg.name }}
             </option>
           </select>
+          <p [hidden]="category.valid || category.pristine" class="text-danger">
+            Category is required
+          </p>
         </div>
         <div class="mb-3">
           <label for="Title" class="form-label">Title</label>
@@ -45,18 +33,27 @@
             name="title"
             #title="ngModel"
           />
+          <p [hidden]="title.valid || title.pristine" class="text-danger">
+            Title is required
+          </p>
         </div>
         <div class="mb-3">
-          <label for="Description" class="form-label">Describtion</label>
+          <label for="Description" class="form-label">description</label>
           <input
             type="text"
             class="form-control"
             id="Description"
             required
-            [(ngModel)]="formData.describtion"
-            name="describtion"
-            #describtion="ngModel"
+            [(ngModel)]="formData.description"
+            name="description"
+            #description="ngModel"
           />
+          <p
+            [hidden]="description.valid || description.pristine"
+            class="text-danger"
+          >
+            Description is required
+          </p>
         </div>
       </div>
       <div class="col">
@@ -71,6 +68,12 @@
             name="startdate"
             #startdate="ngModel"
           />
+          <p
+            [hidden]="startdate.valid || startdate.pristine"
+            class="text-danger"
+          >
+            Start Date is required
+          </p>
         </div>
         <div class="mb-3">
           <label for="FinishDate" class="form-label">Finish Date</label>
@@ -83,6 +86,12 @@
             name="finishdate"
             #finishdate="ngModel"
           />
+          <p
+            [hidden]="finishdate.valid || finishdate.pristine"
+            class="text-danger"
+          >
+            Finish Date is required
+          </p>
         </div>
         <div class="mb-3">
           <label for="Status" class="form-label">Status</label>
@@ -95,8 +104,17 @@
             name="status"
             #status="ngModel"
           />
+          <p [hidden]="status.valid || status.pristine" class="text-danger">
+            Status is required
+          </p>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!taskForm.form.valid"
+        >
+          Submit
+        </button>
       </div>
     </div>
   </form>
