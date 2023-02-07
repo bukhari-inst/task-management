@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Category } from '../category';
+import { Task } from '../task';
 import { CategoryService } from '../category.service';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-task-form',
@@ -15,7 +17,7 @@ export class TaskFormComponent implements OnInit {
   };
 
   formData = {
-    category: '',
+    category_id: '',
     title: '',
     description: '',
     startdate: '',
@@ -24,11 +26,13 @@ export class TaskFormComponent implements OnInit {
   };
 
   constructor(
+    private http: HttpClient,
     private CategoryService: CategoryService,
-    private http: HttpClient
+    private TaskService: TaskService
   ) {}
 
   categories: Category[] = [];
+  task: Task[] = [];
 
   ngOnInit(): void {
     this.getTaskCategories();
@@ -40,6 +44,12 @@ export class TaskFormComponent implements OnInit {
     );
   }
 
+  add(data: any): void {
+    this.TaskService.addTask(data).subscribe((data) => {
+      this.task.push(data);
+    });
+  }
+
   onSubmit(data: any) {
     this.http
       .post<any>(this.url, data, this.httpOptions)
@@ -47,11 +57,5 @@ export class TaskFormComponent implements OnInit {
         console.log(response);
       });
     console.log(data);
-  }
-
-  add(data: any): void {
-    this.CategoryService.addTask(data).subscribe((data) => {
-      this.categories.push(data);
-    });
   }
 }

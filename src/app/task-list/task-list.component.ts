@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { CategoryService } from '../category.service';
 import { Task } from '../task';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -10,10 +10,7 @@ import { Task } from '../task';
   providers: [DatePipe],
 })
 export class TaskListComponent implements OnInit {
-  constructor(
-    private CategoryService: CategoryService,
-    private datePipe: DatePipe
-  ) {}
+  constructor(private TaskService: TaskService, private datePipe: DatePipe) {}
 
   ngOnInit(): void {
     this.getTask();
@@ -23,6 +20,6 @@ export class TaskListComponent implements OnInit {
   date = this.datePipe;
 
   getTask(): void {
-    this.CategoryService.getTask().subscribe((tasks) => (this.tasks = tasks));
+    this.TaskService.getTask().subscribe((tasks) => (this.tasks = tasks));
   }
 }

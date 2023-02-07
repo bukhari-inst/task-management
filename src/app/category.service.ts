@@ -4,14 +4,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
 import { Category } from './category';
-import { Task } from './task';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
   private taskCategoryUrl = 'http://localhost:3000/taskcategories'; // URL to web api
-  private taskUrl = 'http://localhost:3000/tasks'; // URL to web api
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -39,26 +38,10 @@ export class CategoryService {
   }
 
   /** GET task category from the server */
-  getTask(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.taskUrl).pipe(
-      tap((_) => this.log('fetched Task')),
-      catchError(this.handleError<Task[]>('getTask', []))
-    );
-  }
-
-  /** GET task category from the server */
   getTaskCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.taskCategoryUrl).pipe(
       tap((_) => this.log('fetched Task Category')),
       catchError(this.handleError<Category[]>('getTaskCategories', []))
-    );
-  }
-
-  /** POST: add a new task to the server */
-  addTask(task: Category): Observable<Category> {
-    return this.http.post<Category>(this.taskUrl, task, this.httpOptions).pipe(
-      tap((newHero: Category) => this.log(`added task id=${newHero.id}`)),
-      catchError(this.handleError<Category>('addTask'))
     );
   }
 }

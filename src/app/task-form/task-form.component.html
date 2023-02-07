@@ -3,22 +3,25 @@
     <div class="row align-items-start">
       <div class="col">
         <div class="mb-3">
-          <label for="category" class="form-label">Category</label>
+          <label for="category_id" class="form-label">Category</label>
           <select
             class="form-select"
             aria-label="Default select example"
-            id="category"
+            id="category_id"
             required
-            [(ngModel)]="formData.category"
-            name="category"
-            #category="ngModel"
+            [(ngModel)]="formData.category_id"
+            name="category_id"
+            #category_id="ngModel"
           >
             <option selected value="">Select Task Category</option>
             <option *ngFor="let ctg of categories" [value]="ctg.id">
               {{ ctg.name }}
             </option>
           </select>
-          <p [hidden]="category.valid || category.pristine" class="text-danger">
+          <p
+            [hidden]="category_id.valid || category_id.pristine"
+            class="text-danger"
+          >
             Category is required
           </p>
         </div>
