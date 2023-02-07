@@ -21,7 +21,7 @@ export class CategoryService {
   ) {}
 
   private log(message: string) {
-    this.messageService.add(`HeroService: ${message}`);
+    this.messageService.add(`Service: ${message}`);
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -40,7 +40,7 @@ export class CategoryService {
   /** GET task category from the server */
   getTaskCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(this.taskCategoryUrl).pipe(
-      tap((_) => this.log('fetched Category')),
+      tap((_) => this.log('fetched Task Category')),
       catchError(this.handleError<Category[]>('getTaskCategories', []))
     );
   }
