@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-task-form',
@@ -8,7 +12,24 @@ import { CategoryService } from '../category.service';
   styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
-  constructor(private CategoryService: CategoryService) {}
+  private url = 'http://localhost:3000/tasks'; // URL to web api
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
+  formData = {
+    category: '',
+    title: '',
+    describtion: '',
+    startdate: '',
+    finishdate: '',
+    status: '',
+  };
+
+  constructor(
+    private CategoryService: CategoryService,
+    private http: HttpClient
+  ) {}
 
   categories: Category[] = [];
 
@@ -20,5 +41,20 @@ export class TaskFormComponent implements OnInit {
     this.CategoryService.getTaskCategories().subscribe(
       (categories) => (this.categories = categories)
     );
+  }
+
+  onSubmit(data: any) {
+    this.http
+      .post<any>(this.url, data, this.httpOptions)
+      .subscribe((response) => {
+        console.log(response);
+      });
+    console.log(data);
+  }
+
+  add(data: any): void {
+    this.CategoryService.addTask(data).subscribe((data) => {
+      this.categories.push(data);
+    });
   }
 }

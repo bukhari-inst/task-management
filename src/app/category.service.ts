@@ -9,8 +9,8 @@ import { MessageService } from './message.service';
   providedIn: 'root',
 })
 export class CategoryService {
-  private heroesUrl =
-    'https://taskmanagementserver.000webhostapp.com/TaskCategories'; // URL to web api
+  private taskCategoryUrl = 'http://localhost:3000/taskcategories'; // URL to web api
+  private taskUrl = 'http://localhost:3000/tasks'; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
@@ -37,11 +37,19 @@ export class CategoryService {
     };
   }
 
-  /** GET heroes from the server */
+  /** GET task category from the server */
   getTaskCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.heroesUrl).pipe(
+    return this.http.get<Category[]>(this.taskCategoryUrl).pipe(
       tap((_) => this.log('fetched Category')),
       catchError(this.handleError<Category[]>('getTaskCategories', []))
+    );
+  }
+
+  /** POST: add a new task to the server */
+  addTask(task: Category): Observable<Category> {
+    return this.http.post<Category>(this.taskUrl, task, this.httpOptions).pipe(
+      tap((newHero: Category) => this.log(`added task id=${newHero.id}`)),
+      catchError(this.handleError<Category>('addTask'))
     );
   }
 }
