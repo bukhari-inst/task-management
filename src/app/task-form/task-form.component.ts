@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Location } from '@angular/common';
 import { Category } from '../category';
 import { Task } from '../task';
 import { CategoryService } from '../category.service';
@@ -27,6 +28,7 @@ export class TaskFormComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
+    private location: Location,
     private CategoryService: CategoryService,
     private TaskService: TaskService
   ) {}
@@ -38,6 +40,10 @@ export class TaskFormComponent implements OnInit {
     this.getTaskCategories();
   }
 
+  goBack(): void {
+    this.location.back();
+  }
+
   getTaskCategories(): void {
     this.CategoryService.getTaskCategories().subscribe(
       (categories) => (this.categories = categories)
@@ -47,6 +53,7 @@ export class TaskFormComponent implements OnInit {
   add(data: any): void {
     this.TaskService.addTask(data).subscribe((data) => {
       this.task.push(data);
+      this.goBack();
     });
   }
 

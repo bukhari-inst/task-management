@@ -23,6 +23,16 @@ export class TaskService {
     this.messageService.add(`Service: ${message}`);
   }
 
+  /** DELETE: delete the hero from the server */
+  deleteTask(id: number): Observable<Task> {
+    const url = `${this.taskUrl}/${id}`;
+
+    return this.http.delete<Task>(url, this.httpOptions).pipe(
+      tap((_) => this.log(`deleted Task id=${id}`)),
+      catchError(this.handleError<Task>('deleteHero'))
+    );
+  }
+
   /** PUT: update the task on the server */
   updateTask(task: Task): Observable<any> {
     const url = `${this.taskUrl}/${task.id}`;
@@ -33,7 +43,7 @@ export class TaskService {
   }
 
   /** GET Task detail by id */
-  getTaskDetail(id: any): Observable<Task> {
+  getTaskDetail(id: number): Observable<Task> {
     const url = `${this.taskUrl}/${id}`;
     return this.http.get<Task>(url).pipe(
       tap((_) => this.log(`fetched Task id=${id}`)),

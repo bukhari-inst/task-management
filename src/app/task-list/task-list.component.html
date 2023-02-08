@@ -26,7 +26,9 @@
             <i class="fa-solid fa-pen-to-square"></i>
           </a>
         </td>
-        <td><i class="fa-solid fa-trash-can"></i></td>
+        <td>
+          <i class="fa-solid fa-trash-can" (click)="deleteTask(task)"></i>
+        </td>
       </tr>
     </tbody>
   </table>

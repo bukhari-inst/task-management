@@ -19,6 +19,11 @@ export class TaskListComponent implements OnInit {
   tasks: Task[] = [];
   date = this.datePipe;
 
+  deleteTask(tasks: Task): void {
+    this.tasks = this.tasks.filter((h) => h !== tasks);
+    this.TaskService.deleteTask(tasks.id).subscribe();
+  }
+
   getTask(): void {
     this.TaskService.getTask().subscribe((tasks) => (this.tasks = tasks));
   }
