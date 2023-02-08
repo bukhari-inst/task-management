@@ -1,1 +1,124 @@
-<p>task-detail works!</p>
+<section *ngIf="task">
+  <form (ngSubmit)="updateTask()" #taskForm="ngForm">
+    <div class="row align-items-start">
+      <div class="col">
+        <div class="mb-3">
+          <label for="category_id" class="form-label">Category</label>
+          <select
+            class="form-select"
+            aria-label="Default select example"
+            id="category_id"
+            required
+            [(ngModel)]="task.category_id"
+            name="category_id"
+            #category_id="ngModel"
+          >
+            <option selected value="">Select Task Category</option>
+            <option *ngFor="let ctg of categories" [value]="ctg.id">
+              {{ ctg.name }}
+            </option>
+          </select>
+          <p
+            [hidden]="category_id.valid || category_id.pristine"
+            class="text-danger"
+          >
+            Category is required
+          </p>
+        </div>
+        <div class="mb-3">
+          <label for="Title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Title"
+            required
+            [(ngModel)]="task.title"
+            name="title"
+            #title="ngModel"
+          />
+          <p [hidden]="title.valid || title.pristine" class="text-danger">
+            Title is required
+          </p>
+        </div>
+        <div class="mb-3">
+          <label for="Description" class="form-label">description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Description"
+            required
+            [(ngModel)]="task.description"
+            name="description"
+            #description="ngModel"
+          />
+          <p
+            [hidden]="description.valid || description.pristine"
+            class="text-danger"
+          >
+            Description is required
+          </p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <label for="StartDate" class="form-label">Start Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="StartDate"
+            required
+            [(ngModel)]="task.startdate"
+            name="startdate"
+            #startdate="ngModel"
+          />
+          <p
+            [hidden]="startdate.valid || startdate.pristine"
+            class="text-danger"
+          >
+            Start Date is required
+          </p>
+        </div>
+        <div class="mb-3">
+          <label for="FinishDate" class="form-label">Finish Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="FinishDate"
+            required
+            [(ngModel)]="task.finishdate"
+            name="finishdate"
+            #finishdate="ngModel"
+          />
+          <p
+            [hidden]="finishdate.valid || finishdate.pristine"
+            class="text-danger"
+          >
+            Finish Date is required
+          </p>
+        </div>
+        <div class="mb-3">
+          <label for="Status" class="form-label">Status</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Status"
+            required
+            [(ngModel)]="task.status"
+            name="status"
+            #status="ngModel"
+          />
+          <p [hidden]="status.valid || status.pristine" class="text-danger">
+            Status is required
+          </p>
+        </div>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!taskForm.form.valid"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

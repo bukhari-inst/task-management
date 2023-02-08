@@ -23,17 +23,22 @@ export class TaskService {
     this.messageService.add(`Service: ${message}`);
   }
 
-  private handleError<T>(operation = 'operation', result?: T) {
-    return (error: any): Observable<T> => {
-      // TODO: send the error to remote logging infrastructure
-      console.error(error); // log to console instead
+  /** PUT: update the task on the server */
+  updateTask(task: Task): Observable<any> {
+    const url = `${this.taskUrl}/${task.id}`;
+    return this.http.put(url, task, this.httpOptions).pipe(
+      tap((_) => this.log(`updated task id=${task.id}`)),
+      catchError(this.handleError<any>('updateTask'))
+    );
+  }
 
-      // TODO: better job of transforming error for user consumption
-      this.log(`${operation} failed: ${error.message}`);
-
-      // Let the app keep running by returning an empty result.
-      return of(result as T);
-    };
+  /** GET Task detail by id */
+  getTaskDetail(id: any): Observable<Task> {
+    const url = `${this.taskUrl}/${id}`;
+    return this.http.get<Task>(url).pipe(
+      tap((_) => this.log(`fetched Task id=${id}`)),
+      catchError(this.handleError<Task>(`getTask id=${id}`))
+    );
   }
 
   /** GET task from the server */
@@ -50,5 +55,18 @@ export class TaskService {
       tap((newTask: Task) => this.log(`added task id=${newTask.id}`)),
       catchError(this.handleError<Task>('addTask'))
     );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
   }
 }
