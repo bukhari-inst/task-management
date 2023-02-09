@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
 
@@ -8,11 +9,29 @@ import { CategoryService } from '../category.service';
   styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent implements OnInit {
-  constructor(private CategoryService: CategoryService) {}
+  constructor(
+    private CategoryService: CategoryService,
+    private location: Location
+  ) {}
+
+  formData = {
+    name: '',
+  };
 
   ngOnInit(): void {}
 
   category: Category[] = [];
+
+  add(data: any): void {
+    this.CategoryService.addTask(data).subscribe((data) => {
+      this.category.push(data);
+      this.goBack();
+    });
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
 
   getCategory(): void {
     this.CategoryService.getTaskCategories().subscribe(

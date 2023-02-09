@@ -12,7 +12,7 @@ import { TaskService } from '../task.service';
   styleUrls: ['./task-form.component.scss'],
 })
 export class TaskFormComponent implements OnInit {
-  private url = 'http://localhost:3000/tasks'; // URL to web api
+  private url = 'http://127.0.0.1:8000/api/Task'; // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

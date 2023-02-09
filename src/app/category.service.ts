@@ -9,7 +9,7 @@ import { Category } from './category';
   providedIn: 'root',
 })
 export class CategoryService {
-  private taskCategoryUrl = 'http://127.0.0.1:8000/api/TaskCategories'; // URL to web api
+  private categoryUrl = 'http://127.0.0.1:8000/api/TaskCategories'; // URL to web api
   // private taskCategoryUrl = 'http://localhost:3000/taskcategories';
 
   httpOptions = {
@@ -25,6 +25,26 @@ export class CategoryService {
     this.messageService.add(`Service: ${message}`);
   }
 
+  /** POST: add a category task to the server */
+  addTask(task: Category): Observable<Category> {
+    return this.http
+      .post<Category>(this.categoryUrl, task, this.httpOptions)
+      .pipe(
+        tap((newCategory: Category) =>
+          this.log(`added Category id=${newCategory.id}`)
+        ),
+        catchError(this.handleError<Category>('addTask'))
+      );
+  }
+
+  /** GET task category from the server */
+  getTaskCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.categoryUrl).pipe(
+      tap((_) => this.log('fetched Task Category')),
+      catchError(this.handleError<Category[]>('getTaskCategories', []))
+    );
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       // TODO: send the error to remote logging infrastructure
@@ -36,13 +56,5 @@ export class CategoryService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }
-
-  /** GET task category from the server */
-  getTaskCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.taskCategoryUrl).pipe(
-      tap((_) => this.log('fetched Task Category')),
-      catchError(this.handleError<Category[]>('getTaskCategories', []))
-    );
   }
 }
