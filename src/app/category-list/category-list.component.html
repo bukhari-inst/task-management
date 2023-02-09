@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Created</th>
+        <th scope="col">Updated</th>
+        <th scope="col" colspan="3">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let category of categories; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ category.name }}</td>
+        <td>{{ date.transform(category.created_at, "dd-MMM-yyyy") }}</td>
+        <td>{{ date.transform(category.updated_at, "dd-MMM-yyyy") }}</td>
+        <td>
+          <a [routerLink]="['/detail/', category.id]">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </a>
+        </td>
+        <td>
+          <i
+            class="fa-solid fa-trash-can"
+            (click)="deleteCategory(category)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
