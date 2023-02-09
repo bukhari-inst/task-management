@@ -12,9 +12,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { CategoryListComponent } from './category-list/category-list.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, MessageComponent, TaskFormComponent, TaskListComponent, NavbarComponent, TaskDetailComponent, CategoryFormComponent, CategoryListComponent],
+  declarations: [AppComponent, MessageComponent, TaskFormComponent, TaskListComponent, NavbarComponent, TaskDetailComponent, CategoryFormComponent, CategoryListComponent, CategoryDetailComponent],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],

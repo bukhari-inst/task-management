@@ -10,8 +10,8 @@ import { CategoryService } from '../category.service';
 })
 export class CategoryFormComponent implements OnInit {
   constructor(
-    private CategoryService: CategoryService,
-    private location: Location
+    private location: Location,
+    private CategoryService: CategoryService
   ) {}
 
   formData = {

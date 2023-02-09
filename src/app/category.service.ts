@@ -25,6 +25,15 @@ export class CategoryService {
     this.messageService.add(`Service: ${message}`);
   }
 
+  /** PUT: update the category on the server */
+  updateTask(category: Category): Observable<any> {
+    const url = `${this.categoryUrl}/${category.id}`;
+    return this.http.put(url, category, this.httpOptions).pipe(
+      tap((_) => this.log(`updated category id=${category.id}`)),
+      catchError(this.handleError<any>('updateTask'))
+    );
+  }
+
   /** DELETE: delete the hero from the server */
   deleteTask(id: number): Observable<Category> {
     const url = `${this.categoryUrl}/${id}`;
@@ -32,6 +41,15 @@ export class CategoryService {
     return this.http.delete<Category>(url, this.httpOptions).pipe(
       tap((_) => this.log(`deleted Task id=${id}`)),
       catchError(this.handleError<Category>('deleteHero'))
+    );
+  }
+
+  /** GET Task detail by id */
+  getCategoryDetail(id: number): Observable<Category> {
+    const url = `${this.categoryUrl}/${id}`;
+    return this.http.get<Category>(url).pipe(
+      tap((_) => this.log(`fetched Category id=${id}`)),
+      catchError(this.handleError<Category>(`getCategory id=${id}`))
     );
   }
 

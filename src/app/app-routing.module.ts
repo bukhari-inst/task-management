@@ -5,6 +5,7 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 const routes: Routes = [
   { path: 'addtask', component: TaskFormComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: TaskDetailComponent },
   { path: 'taskcategories', component: CategoryListComponent },
   { path: 'addtaskcategories', component: CategoryFormComponent },
+  { path: 'detailcategory/:id', component: CategoryDetailComponent },
 ];
 
 @NgModule({

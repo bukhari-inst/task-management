@@ -1,0 +1,34 @@
+<section *ngIf="categories">
+  <form (ngSubmit)="updateTask()" #categoryForm="ngForm">
+    <div class="row align-items-end">
+      <div class="col">
+        <div class="mb-3">
+          <label for="Title" class="form-label">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="Title"
+            required
+            [(ngModel)]="categories.name"
+            name="name"
+            #name="ngModel"
+          />
+          <p [hidden]="name.valid || name.pristine" class="text-danger">
+            Name is required
+          </p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="!categoryForm.form.valid"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
