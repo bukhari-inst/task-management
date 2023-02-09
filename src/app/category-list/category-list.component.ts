@@ -22,7 +22,10 @@ export class CategoryListComponent implements OnInit {
   categories: Category[] = [];
   date = this.datePipe;
 
-  deleteCategory(category: Category): void {}
+  deleteCategory(categories: Category): void {
+    this.categories = this.categories.filter((h) => h !== categories);
+    this.CategoryService.deleteTask(categories.id).subscribe();
+  }
 
   getCategory(): void {
     this.CategoryService.getTaskCategories().subscribe(

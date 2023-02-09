@@ -25,6 +25,16 @@ export class CategoryService {
     this.messageService.add(`Service: ${message}`);
   }
 
+  /** DELETE: delete the hero from the server */
+  deleteTask(id: number): Observable<Category> {
+    const url = `${this.categoryUrl}/${id}`;
+
+    return this.http.delete<Category>(url, this.httpOptions).pipe(
+      tap((_) => this.log(`deleted Task id=${id}`)),
+      catchError(this.handleError<Category>('deleteHero'))
+    );
+  }
+
   /** POST: add a category task to the server */
   addTask(task: Category): Observable<Category> {
     return this.http
