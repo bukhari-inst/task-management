@@ -9,7 +9,10 @@ import { Task } from './task';
   providedIn: 'root',
 })
 export class TaskService {
-  private taskUrl = 'http://localhost:3000/tasks'; // URL to web api
+  private taskUrl = 'http://127.0.0.1:8000/api/Task'; // URL to web api
+  // private taskUrl = 'http://localhost:3000/tasks';
+
+  // URL to web api
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };

@@ -1,6 +1,7 @@
 export interface Task {
-  id: any;
-  category_id: any;
+  id: number;
+  category_id: number;
+  category: string;
   title: string;
   description: string;
   startdate: string;

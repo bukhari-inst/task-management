@@ -9,7 +9,8 @@ import { Category } from './category';
   providedIn: 'root',
 })
 export class CategoryService {
-  private taskCategoryUrl = 'http://localhost:3000/taskcategories'; // URL to web api
+  private taskCategoryUrl = 'http://127.0.0.1:8000/api/TaskCategories'; // URL to web api
+  // private taskCategoryUrl = 'http://localhost:3000/taskcategories';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
