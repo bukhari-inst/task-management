@@ -20,8 +20,11 @@ export class TaskListComponent implements OnInit {
   date = this.datePipe;
 
   deleteTask(tasks: Task): void {
-    this.tasks = this.tasks.filter((h) => h !== tasks);
-    this.TaskService.deleteTask(tasks.id).subscribe();
+    if (confirm('Are you sure you want to delete this task?')) {
+      this.tasks = this.tasks.filter((h) => h !== tasks);
+      this.TaskService.deleteTask(tasks.id).subscribe();
+      alert('Task deleted sucessfully');
+    }
   }
 
   getTask(): void {

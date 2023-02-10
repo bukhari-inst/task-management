@@ -23,9 +23,11 @@ export class CategoryListComponent implements OnInit {
   date = this.datePipe;
 
   deleteCategory(categories: Category): void {
-    if (confirm('Are you sure you want to delete this category'))
+    if (confirm('Are you sure you want to delete this category?')) {
       this.categories = this.categories.filter((h) => h !== categories);
-    this.CategoryService.deleteTask(categories.id).subscribe();
+      this.CategoryService.deleteTask(categories.id).subscribe();
+      alert('Category deleted sucessfully');
+    }
   }
 
   getCategory(): void {
