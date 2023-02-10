@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
@@ -18,9 +19,20 @@ export class CategoryFormComponent implements OnInit {
     name: '',
   };
 
+  tasksForm = new FormGroup({
+    name: new FormControl('Landing Page', [Validators.required]),
+  });
+
   ngOnInit(): void {}
 
   category: Category[] = [];
+
+  submit(data: any): void {
+    this.CategoryService.addTask(data).subscribe((data) => {
+      this.category.push(data);
+      this.goBack();
+    });
+  }
 
   add(data: any): void {
     this.CategoryService.addTask(data).subscribe((data) => {

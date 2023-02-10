@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,8 +15,24 @@ import { CategoryListComponent } from './category-list/category-list.component';
 import { CategoryDetailComponent } from './category-detail/category-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, MessageComponent, TaskFormComponent, TaskListComponent, NavbarComponent, TaskDetailComponent, CategoryFormComponent, CategoryListComponent, CategoryDetailComponent],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  declarations: [
+    AppComponent,
+    MessageComponent,
+    TaskFormComponent,
+    TaskListComponent,
+    NavbarComponent,
+    TaskDetailComponent,
+    CategoryFormComponent,
+    CategoryListComponent,
+    CategoryDetailComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
