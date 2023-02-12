@@ -27,12 +27,12 @@ export class CategoryFormComponent implements OnInit {
 
   category: Category[] = [];
 
-  submit(data: any): void {
-    this.CategoryService.addTask(data).subscribe((data) => {
-      this.category.push(data);
-      this.goBack();
-    });
-  }
+  // submit(data: any): void {
+  //   this.CategoryService.addTask(data).subscribe((data) => {
+  //     this.category.push(data);
+  //     this.goBack();
+  //   });
+  // }
 
   add(data: any): void {
     this.CategoryService.addTask(data).subscribe((data) => {
